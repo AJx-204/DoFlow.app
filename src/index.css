@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+*{
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s ease;
+}
+
+@media(max-width:720px){
+  .sideBar{
+    position: fixed;
+  }
+}

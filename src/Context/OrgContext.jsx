@@ -58,6 +58,7 @@ export const OrgProvider = ({children}) => {
 
     const value = {
         orgData,
+        setOrgData,
         setOrgId,
         changeOrg,
         orgLoading,

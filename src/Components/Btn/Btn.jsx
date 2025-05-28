@@ -4,7 +4,7 @@ const Btn = ({ text, className, onClick, type, icon}) => {
     <button
      type={type}
      onClick={onClick}
-     className={className}
+     className={`${className} cursor-pointer`}
      >
       {icon}
       {text}

@@ -10,18 +10,18 @@ const Conform = ({title, p1, p2, cancelText, conformText, onCancel, onConform, d
       if(conformRef.current && !conformRef.current.contains(e.target)){
         onCancel();
       }
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
   },[])
 
   return (
     <div
-     className='fixed top-0 left-0 w-screen h-screen bg-black/30 flex items-center justify-center z-100 shadow-md'
+     className='fixed top-0 left-0 w-screen h-screen bg-black/50 flex items-center justify-center z-100'
      >
       <div
        ref={conformRef}
-       className='flex flex-col justify-between max-w-80 min-h-80 rounded bg-zinc-50 dark:bg-zinc-800 p-4 dark:border dark:border-zinc-700/60'
+       className='flex flex-col justify-between max-w-80 min-h-80 rounded bg-zinc-50 dark:bg-zinc-800 p-4 border border-zinc-400 shadow-md dark:border-zinc-700/60'
        >
         <div
          className='flex flex-col gap-2'

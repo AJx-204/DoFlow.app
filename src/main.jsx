@@ -5,6 +5,8 @@ import { ThemeProvider } from './Context/ThemeContext.jsx'
 import { UserProvider } from './Context/UserContext.jsx'
 import Layout from './Layout.jsx'
 import { OrgProvider } from './Context/OrgContext.jsx'
+import { TeamProvider } from './Context/TeamContext.jsx'
+import { ProjectProvider } from './Context/ProjectContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -12,7 +14,11 @@ createRoot(document.getElementById('root')).render(
       <ThemeProvider>
          <UserProvider>
             <OrgProvider>
-               <Layout />
+               <TeamProvider>
+                  <ProjectProvider>
+                    <Layout /> 
+                  </ProjectProvider>
+               </TeamProvider>
             </OrgProvider>
          </UserProvider>
       </ThemeProvider>

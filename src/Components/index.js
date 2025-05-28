@@ -5,6 +5,9 @@ import Loader from "./Loader/Loader";
 import AppLoader from "./Loader/AppLoader";
 import ProfileIcon from "./Nav/ProfileIcon";
 import Menu from "./Profile/Menu";
+import NavMenu from "./Nav/NavMenu";
+import TeamsShow from "./Nav/TeamsShow";
+import SelectOrg from "./Nav/SelectOrg";
 
 export { 
     Logo,
@@ -14,4 +17,7 @@ export {
     AppLoader,
     ProfileIcon,
     Menu,
+    NavMenu,
+    TeamsShow,
+    SelectOrg,
 }

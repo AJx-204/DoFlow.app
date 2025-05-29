@@ -7,6 +7,10 @@
   transition: all 0.3s ease;
 }
 
+.no-transition {
+  transition: none !important;
+}
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
@@ -15,14 +19,10 @@
   scrollbar-width: none;
 }
 
-
-@media(max-width:720px){
-  .sideBar{
+@media(max-width:800px){
+   .sideBar{
     position: fixed;
   }
-}
-
-@media(max-width:800px){
   .membersPage{
     padding: 12px;
   }

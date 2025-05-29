@@ -12,7 +12,7 @@ import { CiUser } from 'react-icons/ci';
 import { UpdateUser } from '../../Auth';
 import { RiOrganizationChart } from "react-icons/ri";
 import { GetRoleColor } from '../../utils/GetRoleColor';
-import { MdOutlineTaskAlt } from "react-icons/md";
+import { BiTask } from "react-icons/bi";
 
 
 const ProfilePage = () => {
@@ -60,7 +60,7 @@ const ProfilePage = () => {
        className='flex flex-col gap-2'
        >
          <span className='mb-2 flex gap-2 items-center text-lg'>
-           <MdOutlineTaskAlt size={22} className='text-emerald-500'/>
+           < BiTask size={22} className='text-emerald-500'/>
            Assing Tasks
          </span>
          <span className='text-zinc-500/80 text-sm ml-4'>No Tasks For You !</span>

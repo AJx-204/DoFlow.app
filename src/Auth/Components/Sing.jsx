@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Btn, Logo, Input, Loader } from '../../Components/index.js';
 import { BiImageAdd } from 'react-icons/bi'
 import useUser from '../../Context/UserContext.jsx';
+import useOrg from '../../Context/OrgContext.jsx';
 
 
 const Sing = () => {
 
   const navigate = useNavigate();
+
+  const { orgData } = useOrg();
 
   const {
     singUp,
@@ -50,7 +53,11 @@ const Sing = () => {
     }else{
       const result = await login(email, password);
       if(result.success){
-        navigate('/')
+        if(orgData){
+          navigate(`/${orgData.orgName}`)
+        }else{
+          navigate('/profile')
+        }
       }else if(result.redirectToVerify){
         await resendOtp(email)
         navigate('/verify-otp')

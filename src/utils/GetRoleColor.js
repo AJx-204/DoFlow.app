@@ -1,4 +1,4 @@
-// utils/getRoleColor.js
+
 export const GetRoleColor = (role) => {
   const roleColors = {
     admin: 'bg-red-500/2 border-red-500/15',

@@ -60,7 +60,7 @@ const Profile = ({setShowProfile}) => {
         className='p-2 flex flex-col gap-1' 
        >
         <Link
-         to={'/profile'}
+         to={`/profile/${user.userName}`}
          >
           <Menu
             icon={<IoSettingsOutline size={20}/>}

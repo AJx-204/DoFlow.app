@@ -14,11 +14,11 @@ const ProfileIcon = () => {
     function sliceEmail(Email){
        if(!Email) return ;
        return Email.length > 20 ? Email.slice(0,20) + "....." : Email;
-    }; 
+    };
 
   return (
     <>
-      <div className='z-10 sticky bottom-0 backdrop-blur-2xl p-1 border-t border-zinc-200 dark:border-zinc-800 cursor-pointer'>
+      <div className='p-1 border-t-2 border-zinc-500/10 cursor-pointer'>
        {user && 
          <div
           onClick={()=>setShowProfile(!showProfile)} 
@@ -28,7 +28,7 @@ const ProfileIcon = () => {
                  {user.profilePhoto ? <img className='h-full w-full object-cover' src={user.profilePhoto} alt="" /> : <CiUser size={22}/>}
                </div>
                <div className='flex flex-col mt-0.5 text-[12px]'>
-                  <p className='font-semibold text-[13px]'>{user.userName}</p>
+                  <p className='text-[13px]'>{user.userName}</p>
                   <span className='text-zinc-500'>
                     {sliceEmail(user.email)}
                   </span>

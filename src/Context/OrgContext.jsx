@@ -1,12 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useUser from "./UserContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const OrgContext = createContext();
 
 export const OrgProvider = ({children}) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+    const navigate = useNavigate();
 
     const { user } = useUser();
     const [orgId, setOrgId] = useState(null);

@@ -21,7 +21,7 @@ const Members = () => {
   return (
     <>
     <div className='membersPage flex flex-col p-4 gap-3'>
-      <div className='font-medium text-sm opacity-80'>{orgData ? `Organization - ${orgData.orgName}'s Members`: "Not any Organization selected"}</div>
+      <div className='font-medium opacity-80'>{orgData ? `Organization - ${orgData.orgName}'s Members`: "Not any Organization selected"}</div>
       <div className="memebersGrid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {orgData?.members?.map((memberData) => {
           const { member, role, joinedAt, _id } = memberData;

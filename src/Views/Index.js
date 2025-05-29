@@ -5,6 +5,7 @@ import Members from "./Members/Members";
 import Timeline from "./TimeLine/Timeline";
 import TeamMembers from "./TeamMembers/TeamMembers";
 import Projects from "./Project/Projects";
+import Org from "./Org/Org";
 
 
 export {
@@ -15,4 +16,5 @@ export {
     Timeline,
     TeamMembers,
     Projects,
-}
+    Org
+}   

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Sidebar from './Sidebar'
-import { Members, ProfilePage, TeamMembers, Projects } from './Views'
+import { Members, ProfilePage, TeamMembers, Projects, Org } from './Views'
 import Topbar from './Topbar'
 
 
@@ -22,20 +22,30 @@ const App = () => {
             >
              <Routes>
                 <Route
-                  path='/profile'
-                  element={<ProfilePage/>}
+                  path='/:orgName'
+                  element={<Org/>}
                 />
                 <Route
                   path='/:org/members'
                   element={<Members/>}
                 />
                 <Route
-                  path='/:org/:team/TeamMembers'
+                  path='/:org/:team/TeamMembers/:teamId'
                   element={<TeamMembers/>}
                 />
                  <Route
-                  path='/:org/:project'
+                  path='/:org/:project/:projectId/*'
                   element={<Projects/>}
+                >
+                  <Route path=':section/:sectionId' element={<Projects />} />
+                </Route>
+                <Route
+                  path='/:orgName/dashboard'
+                  element={<ProfilePage/>}
+                />
+                <Route
+                  path='/profile/:userName'
+                  element={<ProfilePage/>}
                 />
              </Routes>
           </div>

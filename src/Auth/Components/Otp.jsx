@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react'
 import { Btn, Logo, Input, Loader } from '../../Components/index.js';
 import useUser from '../../Context/UserContext.jsx';
 import { useNavigate } from 'react-router-dom';
+import useOrg from '../../Context/OrgContext.jsx';
 
 const Otp = () => {
 
   const navigate = useNavigate();
+
+  const { orgData } = useOrg();
 
   const {
     userEmail,
@@ -30,7 +33,11 @@ const Otp = () => {
     setAuthError('')
     const success = await verifyOtp(otp, userEmail);
     if(success){
-      navigate('/')
+       if(orgData){
+          navigate(`/${orgData.orgName}`)
+        }else{
+          navigate('/profile')
+        }
     }
   };
 

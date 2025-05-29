@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import NavMenu from './NavMenu';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { RiTeamFill } from "react-icons/ri";
 import { VscAdd } from 'react-icons/vsc';
 import Btn from '../Btn/Btn';
 import useOrg from '../../Context/OrgContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useTeam } from '../../Context/TeamContext';
 import { GetRoleColor } from '../../utils/GetRoleColor';
+import { HiOutlineUsers } from "react-icons/hi2";
 
 
 const TeamsShow = () => {
@@ -22,12 +22,12 @@ const TeamsShow = () => {
 
   return (
     <div
-     className='px-2 mt-1 flex flex-col font-semibold text-[12.5px]'
+     className='ml-3 mt-1 flex flex-col text-[13px]'
      >
       <NavMenu
        onClick={()=>setIsTeamsOpen(!isTeamsOpen)}
-       icon={<RiTeamFill size={16}/>}
-       icon2={isTeamsOpen ? <IoIosArrowUp size={16} className='opacity-30 group-hover:opacity-70'/> : <IoIosArrowDown size={16} className='opacity-30 group-hover:opacity-70'/>}
+       icon={<HiOutlineUsers size={18}  strokeWidth={1.5}/>}
+       icon2={isTeamsOpen ? <IoIosArrowUp size={14} className='opacity-50 group-hover:opacity-100'/> : <IoIosArrowDown size={14} className='opacity-50 group-hover:opacity-100'/>}
        text={"Teams"}
        className={`${isTeamsOpen || location.pathname.includes('TeamMembers') ? "bg-zinc-500/15":""} hover:bg-zinc-300 dark:hover:bg-zinc-800 rounded-md cursor-pointer group`}
        />
@@ -38,10 +38,10 @@ const TeamsShow = () => {
            {orgData.teams.map((team) => (
             <Link
              key={team._id}
-             to={`/${orgData.orgName}/${team.teamName}/TeamMembers`}
+             to={`/${orgData.orgName}/${team.teamName}/TeamMembers/${team._id}`}
              onClick={()=>setSelectedTeam(team)}
              >
-             <div className={`${location.pathname.includes(team.teamName) ? "bg-zinc-800 text-zinc-300 shadow-md dark:bg-zinc-200 dark:text-zinc-800" :"hover:bg-zinc-300 dark:hover:bg-zinc-800 hover:border-zinc-500/20 bg-zinc-500/5 "} border border-zinc-500/10 rounded-md mt-1 flex justify-between items-center`}>
+             <div className={`${location.pathname.includes(team._id) ? "bg-zinc-800 text-zinc-300 shadow-md dark:bg-zinc-200 dark:text-zinc-800" :"hover:bg-zinc-300 dark:hover:bg-zinc-800 hover:border-zinc-500/10 bg-zinc-500/2 "} border border-zinc-500/10 rounded-md mt-1 flex justify-between items-center`}>
                <NavMenu
                 key={team._id} 
                 text={team.teamName} 
@@ -62,7 +62,7 @@ const TeamsShow = () => {
            ))}
            <div className='w-full flex justify-center'>
              <Btn
-               text={"Add Team"}
+               text={"Create Team"}
                icon={<VscAdd strokeWidth={0.5} />}
                className='mt-2 flex shadow-md hover:bg-blue-500/60 hover:border-blue-500/70 gap-2 items-center px-3 py-1 rounded-md bg-blue-500/20 border border-blue-500/30'
              />

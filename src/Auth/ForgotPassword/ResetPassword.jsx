@@ -11,7 +11,7 @@ const ResetPassword = () => {
     const { user, resetPasswordOtp, forgotPassword, authError, setAuthError, updateLoading } = useUser();
 
     const [showEmailInput, setShowEmailInput] = useState(true);
-    const [registerEmail, setRegisterEmail] = useState(null)
+    const [registerEmail, setRegisterEmail] = useState('')
 
     const [resetOpt, setResetOtp] = useState('');
     const [newPassword, setNewPassword] = useState('') 
@@ -42,7 +42,7 @@ const ResetPassword = () => {
     {showEmailInput ? (
     <div className='flex flex-col gap-1'>
      <div
-      onClick={()=>navigate('/profile')}
+      onClick={()=>navigate(`/profile/${user.userName}`)}
       className='flex gap-2 items-center hover:gap-0 hover:-ml-2 p-2 font-medium w-[max-content]'
       >
         <GoArrowLeft size={18}/>

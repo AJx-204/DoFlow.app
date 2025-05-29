@@ -3,9 +3,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import useUser from '../../Context/UserContext';
 import useOrg from '../../Context/OrgContext';
 import {Btn, Loader} from '../index';
+import { MdAdd } from "react-icons/md";
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const SelectOrg = () => {
+
+  const navigate = useNavigate();
     
   const { user } = useUser();
   const { orgData, changeOrg, orgLoading, orgError, setOrgError } = useOrg();
@@ -26,18 +30,20 @@ const SelectOrg = () => {
   useEffect(() => {
     if (!orgLoading && orgData) {
       setShowOrgMenu(false);
-    }
+    };
+    navigate(`/${orgData?.orgName}`)
   }, [orgLoading, orgData]);
-
+  
   const handleSelectOrg = (id) => {
-     if(id == orgData._id){
+     if (orgData && id === orgData._id){
        setShowOrgMenu(false);
        return
-     }
+     }  
      changeOrg(id)
   }
 
-  return (
+
+  return ( user ? 
            <div>
               {orgData || user.inOrg.length > 0 ? (
              <div
@@ -47,9 +53,11 @@ const SelectOrg = () => {
                <div
                 className='h-6 w-6 rounded-full flex items-center justify-center overflow-hidden border border-zinc-500/50 '
                 >
-                 <img className='h-full w-full object-cover' src={orgData?.orgProfilePhoto} alt="" />
+                 <img className='h-full w-full object-cover' src={orgData?.orgProfilePhoto || "/default-org.png"} alt="" />
                </div>
-               <span className='line-clamp-1'>{orgData?.orgName || "Select Org"}</span>
+               {orgLoading ? <Loader size='15px' color='blue'/> :
+                <span className='line-clamp-1'>{orgData?.orgName || "Select Org"}</span>
+               }
                <IoIosArrowDown className='group-hover:mt-1.5 text-zinc-500'/>
              </div>
            ):(
@@ -73,22 +81,30 @@ const SelectOrg = () => {
                 color='blue'
                 />
               ):(user?.inOrg?.map(item => (
-               <div  
+               <div
                  key={item.org._id}
                  className='p-2 flex gap-3 rounded-md hover:bg-zinc-500/20 items-center'
                  onClick={() => handleSelectOrg(item.org._id)}
                 >
-                 <i
+                 <div
                   className='h-8 w-8 rounded-full border border-zinc-500/50 flex items-center justify-center overflow-hidden'
                   >
-                  <img className='w-full h-full object-cover' src={item.org?.orgProfilePhoto} alt="" /> 
-                 </i>
+                  <img className='w-full h-full object-cover' src={item.org?.orgProfilePhoto || "/default-org.png"} alt="" /> 
+                 </div>
                  <span className='line-clamp-1 font-medium'>{item.org.orgName}</span>
                </div>
              )))}
+             <div className='flex justify-center m-1 mt-2'>
+               <Btn
+                text={'Create Organization'}
+                className={'flex items-center gap-2 text-xs font-semibold p-1.5 pr-3 border border-blue-500/30 bg-blue-500/20 rounded-md hover:bg-blue-500/50 hover:border-blue-500/70 shadow-md'}
+                icon={<MdAdd size={16}/>}
+               />
+             </div>
              {orgError && <span className='text-red-500'>{orgError}</span>}
            </div>}
            </div>
+      : ""
   )
 }
 

@@ -9,7 +9,7 @@ export const OrgProvider = ({children}) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-    const navigate = useNavigate();
+    const { setAuthLoding } = useUser();
 
     const { user } = useUser();
     const [orgId, setOrgId] = useState(null);
@@ -36,6 +36,7 @@ export const OrgProvider = ({children}) => {
     };
 
     const getOrg = async (id) => {
+        setAuthLoding(true);
         setOrgLoading(true);
         try {
             const res = await axios.get(`${backendUrl}/getOrg/${id}`,{
@@ -49,8 +50,65 @@ export const OrgProvider = ({children}) => {
                setOrgError("Something went wrong. Please try again."); 
             }
         } finally {
-            setOrgLoading(false)
+            setOrgLoading(false);
+            setAuthLoding(false);
         };
+    };
+
+    const updateOrg = async (orgName, description, orgProfilePhoto) => {
+        setOrgLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append("orgName", orgName);
+            formData.append('description', description)
+            if (orgProfilePhoto) {
+                formData.append("orgProfilePhoto", orgProfilePhoto);
+            }
+            const res = await axios.put(`${backendUrl}/org/updateOrg/${orgId}`, formData, {
+                withCredentials: true
+            });
+            if (res.data && res.data.data) {
+              const updatedOrg = res.data.data;
+              setOrgData({
+                  ...orgData,
+                  orgName: updatedOrg.orgName,
+                  description: updatedOrg.description,
+                  orgProfilePhoto: updatedOrg.orgProfilePhoto,
+              });
+            }
+            return true
+        } catch (error) {
+             if (error.response && error.response.data?.message) {
+               setOrgError(error.response.data.message);
+            }else{
+               setOrgError("Something went wrong. Please try again."); 
+            }
+        } finally {
+            setOrgLoading(false);
+        }
+    };
+
+    const leaveOrg = async () => {
+        setOrgLoading(true);
+        try {
+            const res = await axios.post(`${backendUrl}/org/${orgId}/leaveOrg`, {}, {
+                withCredentials:true
+            })
+            if(res.data){
+                setOrgId(null)
+                setOrgData(null)
+                localStorage.removeItem("currentOrgId");
+            };
+            return true
+        } catch (error) {
+            if (error.response && error.response.data?.message) {
+               setOrgError(error.response.data.message);
+            }else{
+               setOrgError("Something went wrong. Please try again."); 
+            }
+        } finally {
+            setOrgLoading(false)
+        }
     };
 
     useEffect(() => {
@@ -67,6 +125,8 @@ export const OrgProvider = ({children}) => {
         orgLoading,
         orgError,
         setOrgError,
+        updateOrg,
+        leaveOrg,
     };
 
     return(

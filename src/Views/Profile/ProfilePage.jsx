@@ -153,7 +153,7 @@ const ProfilePage = () => {
            onClick={logout}
            text={"Log-Out"}
            icon={<TbLogout2 size={18}/>}
-           className={"cursor-pointer w-[max-content] text-[14px] font-medium flex gap-3 mt-2 text-red-500 hover:text-red-600 hover:scale-102"}
+           className={"cursor-pointer w-[max-content] text-[14px] font-medium items-center flex gap-3 mt-2 text-red-500 hover:text-red-600 hover:scale-102"}
            />
         </div>
         { showUpdateUserPopup && <UpdateUser setShowUpdateUserPopup={setShowUpdateUserPopup}/>}

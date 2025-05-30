@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import { Btn } from '../../Components'
+import { Btn, Loader } from '../../Components'
 
-const Conform = ({title, p1, p2, cancelText, conformText, onCancel, onConform, danger}) => {
+const Conform = ({title, p1, p2, cancelText, conformText, onCancel, onConform, danger, loding, error}) => {
 
   const conformRef = useRef();
 
@@ -42,20 +42,25 @@ const Conform = ({title, p1, p2, cancelText, conformText, onCancel, onConform, d
              {p2}
           </p>
         </div>
+        {error && <span className='text-sm text-red-500 items-start'> { error } </span>}
         <div
          className='flex gap-4 self-end'
          >
-          <Btn
-           onClick={onCancel}
-           text={cancelText}
-           className={'px-3 py-1 rounded border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 hover:border-zinc-500/50 hover:bg-zinc-500/10'}
-           />
-          <Btn
-           onClick={onConform}
-           text={conformText}
-           className={`px-3 py-1 rounded border border-zinc-500/20 
-              ${ danger ? "text-red-500 hover:border-red-500/30 hover:bg-red-500/20":"text-green-500 hover:border-green-500/30 hover:bg-green-500/20"}`}
-           />
+          {loding ? <Loader size='15px'/> : (
+           <>
+            <Btn
+             onClick={onCancel}
+             text={cancelText}
+             className={'px-3 py-1 rounded border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 hover:border-zinc-500/50 hover:bg-zinc-500/10'}
+             />
+            <Btn
+             onClick={onConform}
+             text={conformText}
+             className={`px-3 py-1 rounded border border-zinc-500/20 
+                ${ danger ? "text-red-500 hover:border-red-500/30 hover:bg-red-500/20":"text-green-500 hover:border-green-500/30 hover:bg-green-500/20"}`}
+             />
+           </>
+           )}
         </div>
       </div>
     </div>

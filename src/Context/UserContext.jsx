@@ -110,7 +110,7 @@ export const UserProvider = ({children}) => {
                 password
             },{ withCredentials:true});
             setUser(res.data?.data)
-            return { success: true };
+            return {success : true}
         } catch (error) {
             const res = error.response;
             if (res?.data?.needsVerification) {
@@ -217,6 +217,7 @@ export const UserProvider = ({children}) => {
         authError,
         setAuthError,
         authLoding,
+        setAuthLoding,
         singUp,
         login,
         verifyOtp,

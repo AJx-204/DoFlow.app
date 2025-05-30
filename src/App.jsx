@@ -22,7 +22,7 @@ const App = () => {
             >
              <Routes>
                 <Route
-                  path='/:orgName'
+                  path='/:orgName/:orgId'
                   element={<Org/>}
                 />
                 <Route

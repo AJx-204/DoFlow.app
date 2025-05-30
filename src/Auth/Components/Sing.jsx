@@ -13,13 +13,13 @@ const Sing = () => {
   const { orgData } = useOrg();
 
   const {
+    user,
     singUp,
     login,
     authError,
     setAuthError,
     authLoding,
     resendOtp,
-    FromLoginresetPasswordOtp
   } = useUser();
 
   const [ isSingUp, setIsSingUp ] = useState(true);
@@ -54,9 +54,9 @@ const Sing = () => {
       const result = await login(email, password);
       if(result.success){
         if(orgData){
-          navigate(`/${orgData.orgName}`)
+          navigate(`/${orgData?.orgName}/${orgData._id}`)
         }else{
-          navigate('/profile')
+          navigate(`/profile/${user.userName}`)
         }
       }else if(result.redirectToVerify){
         await resendOtp(email)

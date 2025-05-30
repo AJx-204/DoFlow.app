@@ -4,18 +4,23 @@ import useUser from '../../Context/UserContext';
 import useOrg from '../../Context/OrgContext';
 import {Btn, Loader} from '../index';
 import { MdAdd } from "react-icons/md";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const SelectOrg = () => {
 
   const navigate = useNavigate();
-    
+
+  const location = useLocation();
+
   const { user } = useUser();
+  
   const { orgData, changeOrg, orgLoading, orgError, setOrgError } = useOrg();
 
   const [showOrgMenu, setShowOrgMenu] = useState(false);
   const orgListRef = useRef();
+
+  const isOrgPage = location.pathname.split('/').pop() == orgData?._id
 
   useEffect(()=>{
     const handleClickOutside = (e) => {
@@ -30,12 +35,12 @@ const SelectOrg = () => {
   useEffect(() => {
     if (!orgLoading && orgData) {
       setShowOrgMenu(false);
+      navigate(`/${orgData?.orgName}/${orgData?._id}`)
     };
-    navigate(`/${orgData?.orgName}`)
-  }, [orgLoading, orgData]);
+    }, [orgLoading, orgData]);
   
   const handleSelectOrg = (id) => {
-     if (orgData && id === orgData._id){
+     if (orgData && orgData._id == id){
        setShowOrgMenu(false);
        return
      }  
@@ -48,7 +53,9 @@ const SelectOrg = () => {
               {orgData || user.inOrg.length > 0 ? (
              <div
               onClick={()=>(setOrgError('') ,setShowOrgMenu(true))}
-              className={`${showOrgMenu ? "border-zinc-500 shadow-md" : "hover:border-zinc-500 hover:shadow-md border-zinc-500/30"} cursor-pointer max-w-50 group shadow p-1 pr-2 flex gap-2 border  items-center rounded-full text-sm font-semibold`}
+              className={`${showOrgMenu ? "border-zinc-500 shadow-md" : "hover:border-zinc-500 hover:shadow-md border-zinc-500/30"}
+              ${isOrgPage ? "bg-zinc-800 text-zinc-200 dark:bg-zinc-200 dark:text-zinc-800" : ""}
+               cursor-pointer max-w-50 group shadow p-1 pr-2 flex gap-2 border  items-center rounded-full text-sm font-semibold`}
               >
                <div
                 className='h-6 w-6 rounded-full flex items-center justify-center overflow-hidden border border-zinc-500/50 '
@@ -63,7 +70,7 @@ const SelectOrg = () => {
            ):(
              <Btn
               text={'Create Organization'}
-              className={'font-medium text-[12px] px-2 py-1 rounded-full shadow-md bg-blue-500/30 border border-blue-500/50 hover:bg-blue-500/50 hover:border-blue-500'}
+              className={'font-medium text-[12px] px-2 py-[5.5px] rounded-full shadow-md bg-blue-500/30 border border-blue-500/50 hover:bg-blue-500/50 hover:border-blue-500'}
               />
            )}
            {showOrgMenu && <div
@@ -81,10 +88,11 @@ const SelectOrg = () => {
                 color='blue'
                 />
               ):(user?.inOrg?.map(item => (
-               <div
+               <Link
+                 to={`/${orgData?.orgName}/${orgData?._id}`}
                  key={item.org._id}
                  className='p-2 flex gap-3 rounded-md hover:bg-zinc-500/20 items-center'
-                 onClick={() => handleSelectOrg(item.org._id)}
+                 onClick={() => handleSelectOrg(item?.org._id)}
                 >
                  <div
                   className='h-8 w-8 rounded-full border border-zinc-500/50 flex items-center justify-center overflow-hidden'
@@ -92,7 +100,7 @@ const SelectOrg = () => {
                   <img className='w-full h-full object-cover' src={item.org?.orgProfilePhoto || "/default-org.png"} alt="" /> 
                  </div>
                  <span className='line-clamp-1 font-medium'>{item.org.orgName}</span>
-               </div>
+               </Link>
              )))}
              <div className='flex justify-center m-1 mt-2'>
                <Btn

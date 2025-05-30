@@ -8,6 +8,7 @@ import Menu from "./Profile/Menu";
 import NavMenu from "./Nav/NavMenu";
 import TeamsShow from "./Nav/TeamsShow";
 import SelectOrg from "./Nav/SelectOrg";
+import UpdateOrg from "./update/UpdateOrg";
 
 export { 
     Logo,
@@ -20,4 +21,5 @@ export {
     NavMenu,
     TeamsShow,
     SelectOrg,
+    UpdateOrg,
 }

@@ -190,7 +190,9 @@ export const UserProvider = ({children}) => {
         setUpdateLoading(true)
         try {
             const formData = new FormData();
-            formData.append("userName", userName);
+            if(userName){
+                formData.append("userName", userName);
+            }
             if (profilePhoto) {
                 formData.append("profilePhoto", profilePhoto);
             }

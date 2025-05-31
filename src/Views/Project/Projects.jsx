@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useProject } from '../../Context/ProjectContext';
 import { GoProjectSymlink } from "react-icons/go";
 import { Btn, NavMenu } from '../../Components'
@@ -11,6 +11,9 @@ import { VscAdd } from 'react-icons/vsc';
 const Projects = () => {
 
   const { selectedProject } = useProject();
+
+  const [selectedSection, setSelectedSection] = useState('');
+
 
   return (
     selectedProject ? <div>
@@ -46,6 +49,7 @@ const Projects = () => {
           {selectedProject.projectSections.length > 0 ? selectedProject.projectSections.map((sec)=>(
            <Link
             key={sec._id}
+            onClick={()=>setSelectedSection(sec)}
             to={`/${selectedProject.inOrg.orgName}/${selectedProject.projectName}/${selectedProject._id}/${sec.sectionName}/${sec._id}`} 
             >
               <NavMenu

@@ -56,7 +56,7 @@ const Sing = () => {
         if(orgData){
           navigate(`/${orgData?.orgName}/${orgData._id}`)
         }else{
-          navigate(`/profile/${user.userName}`)
+          navigate(`/profile/${user?.userName}`)
         }
       }else if(result.redirectToVerify){
         await resendOtp(email)

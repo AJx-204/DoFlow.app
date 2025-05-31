@@ -27,7 +27,7 @@ const Timeline = () => {
     <>
       <div
        onClick={()=>setShowTimeLines(!showTimeLines)} 
-       className={`${showTimeLines ? "border-zinc-500" : "hover:border-zinc-500 border-zinc-500/30"} p-1.5 cursor-pointer flex items-center group justify-center shadow-md rounded-full border  `}>
+       className={`${showTimeLines ? "border-zinc-500" : "hover:border-zinc-500 border-zinc-500/30"} p-1.5 cursor-pointer flex items-center group justify-center shadow-md rounded-full border z-100`}>
         <MdOutlineTimeline size={17}/>
         <span className='absolute group-hover:flex hidden top-11 text-xs px-2 py-1 bg-zinc-500/20 border border-zinc-500/50 backdrop-blur-2xl rounded-md'>Time Line</span>
       </div>

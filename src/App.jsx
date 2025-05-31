@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <div
-       className='min-h-screen w-full flex bg-zinc-50 dark:bg-[#1c1c1c] text-zinc-800 dark:text-zinc-200' 
+       className='min-h-screen w-full flex bg-zinc-50 dark:bg-[#1c1c1c] text-zinc-800 dark:text-zinc-200 scrollbar-hidden' 
        >
         <Sidebar/>
         <div

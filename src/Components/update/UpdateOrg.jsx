@@ -18,6 +18,7 @@ const UpdateOrg = ({setShowUpdateOrgPopup}) => {
       const handleClickOutside = (e) => {
         if(updatePopupRef.current && !updatePopupRef.current.contains(e.target)){
           setShowUpdateOrgPopup(false);
+          setOrgError('')
         }
       };
       document.addEventListener('mousedown', handleClickOutside);
@@ -49,7 +50,7 @@ const UpdateOrg = ({setShowUpdateOrgPopup}) => {
         ref={updatePopupRef} 
         className='flex flex-col gap-1'>
          <div
-         onClick={()=>setShowUpdateOrgPopup(false)}
+         onClick={()=>(setShowUpdateOrgPopup(false),setOrgError(''))}
            className='text-white flex gap-2 items-center hover:gap-0 hover:-ml-2 p-2 font-medium w-[max-content]'
            >
              <GoArrowLeft size={18}/>

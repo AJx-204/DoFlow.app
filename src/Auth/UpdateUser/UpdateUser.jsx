@@ -38,7 +38,7 @@ const UpdateUser = ({setShowUpdateUserPopup}) => {
 
     const handleUpdateUser = async (e) => {
         e.preventDefault();
-        if(!userName || profilePhoto){
+        if(!userName && !profilePhoto){
           setAuthError('One field is required to update profile')
           return
         }

@@ -11,7 +11,7 @@
   transition: none !important;
 }
 
-.scrollbar-hidden::-webkit-scrollbar {
+.scrollbar-hidden::-webkit-scrollbar{
   display: none;
 }
 .scrollbar-hidden {
